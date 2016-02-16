@@ -1,0 +1,49 @@
+.small-box{
+	overflow:hidden;
+}
+
+.small-box h4{
+	color:white;
+}
+.small-box div.inner div {
+	width:48%;padding-left:10px;border:2px solid white;border-radius:8px;margin-bottom:15px;
+}
+
+.small-box div.inner div h3 {
+	margin:0;
+}
+
+.small-box div.inner div h3 sup {
+	font-size: 20px
+}
+
+.orion-bootstrap-admin .sidebar {
+
+background: #031037;
+
+}
+
+.navbar-inverse {
+    background-color: #031037;
+    border-color: #080808;
+}
+
+.orion-bootstrap-admin .navbar .navbar-collapse, .orion-bootstrap-admin .navbar .navbar-form {
+    border-color: #031037;
+}
+.green{
+
+	color:#337ab7;
+}
+.red2{
+
+	color:gray;
+}
+.gray{
+
+	color:gray;
+}
+.color{
+
+	background-color: black;
+}

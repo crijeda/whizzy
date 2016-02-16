@@ -1,0 +1,318 @@
+<template name="collectionsNewsIndex">
+  {{# Layout template="orionBootstrapMediumContentOffset" }}
+  {{# Layout template="orionBootstrapTitle" }}
+  {{ collection.title }}
+  {{# if collection.canShowCreate }}
+  <a href="{{ collection.createPath }}" class="btn btn-default btn-xs"><i class="fa fa-plus"></i></a>
+  {{/ if }}
+  {{/ Layout }}
+  <div class="controls ">
+    {{# autoForm schema="SearchNewsSchema" id="collectionsNewsIndexSearchForm" doc=theDoc }}
+    <div class="row">
+    {{# if currentUser.hasRole 'admin' }}
+       <div class="col-sm-3">
+        {{> afQuickField name='groupsIds' }}
+      </div>
+
+      {{/ if }}
+      <div class="col-sm-3">
+        {{> afQuickField name='brandsIds' }}
+      </div>
+      <div class="col-sm-3">
+        {{> afQuickField name='fromDate' }}
+      </div>
+      <div class="col-sm-3">
+        {{> afQuickField name='toDate' }}
+      </div>
+      {{# unless currentUser.hasRole 'admin' }}
+      <div class="col-sm-3">
+        <label for="">Filtro</label>
+        {{> afQuickField name='showToCategorize' }}
+      </div>
+      {{/ unless }}
+        
+      </div>
+
+      {{/ autoForm }}
+    </div>
+    <div class="data">
+      {{# if totalCount }}
+      <p>
+        {{# if checkedCount }}
+
+        <span class="pull-right">
+          <b style="margin-right: 8px;">
+            Exportar {{ checkedCount }}
+          </b>
+          <big>
+            <a href="#" class="export-btn iconss" data-type="pdf" style="margin-right: 5px;">
+             <i class="fa fa-file-pdf-o"></i>
+           </a>
+           <a href="#" class="export-btn iconss" data-type="powerpoint" style="margin-right: 5px;">
+             <i class="fa fa-file-powerpoint-o"></i>
+           </a>
+           <a href="#" class="export-btn iconss" data-type="excel">
+             <i class="fa fa-file-excel-o"></i>
+           </a>
+         </big>
+       </span>
+       {{/ if }}
+       {{# if currentUser.hasRole 'admin' }}
+       <b>{{ localCount }} de {{ totalCount }}</b>
+       {{/ if}}
+     </p>
+     {{/ if }}
+
+     <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>
+
+           <!--  {{# if allChecked }}
+            <input type="checkbox" class="check-all" checked="true">
+            {{ else }}
+            <input type="checkbox" class="check-all">
+            {{/ if }} -->
+            
+          </th>
+          <th width="350px">
+            Título
+          </th>
+          <th>
+            Fecha
+          </th>
+          <th>
+            Tipo
+          </th>
+          <th>
+            Medio
+          </th>
+          <th width="70px">
+            Marca
+          </th>
+          <th>
+            Estado
+          </th>
+          <th>
+            Foto
+          </th>
+          <th>
+            Acciones
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {{# each newsToShow }}
+        {{# unless currentUser.hasRole 'admin' }}
+        {{# if prevAprove }}
+        <tr>
+          <td>
+            {{# if allChecked }}
+            <input type="checkbox" class="check-doc" checked="true" disabled="true">
+            {{ else }}
+            <input type="checkbox" class="check-doc">
+            {{/ if }}
+          </td>
+          <td>
+            {{ title }}
+          </td>
+          <td>
+            {{ dateFormat date 'D-M-YYYY' }}
+          </td>
+          <td>
+            {{# each data }}
+            {{ data.tiponot }}
+            {{/ each }}
+          </td>
+          <td>
+     <!--        {{# each mediums }}
+            {{ name }}
+            {{/ each }} -->
+            {{# each data }}
+            {{ data.medio }}
+            {{/ each }}
+          </td>
+          <td>
+            {{# each brands2 }}
+            <a class="label color">{{ name }}</a>
+             {{/ each }}
+          </td>
+          <td align="center">
+            {{# unless currentUser.hasRole 'admin' }}
+            {{# if isCategorized currentUser._id }}
+            <i class="fa fa-check-circle green"></i>
+            {{else}}
+            <i class="fa fa-check-circle red2"></i>
+            {{/ if }}
+            {{/ unless}}
+
+            {{# unless currentUser.hasRole 'ejecutivo' }}
+            {{# unless currentUser.hasRole 'agencia' }}
+            {{# unless currentUser.hasRole 'cliente' }}
+
+            {{# if prevAprove }}
+            <a class="label label-success">Enviada</a>
+            {{else}}
+            <a class="label label-warning">No Enviada</a>
+            {{/if}}
+
+            {{/ unless }}
+            {{/ unless }}
+            {{/ unless }}
+
+          </td>
+            <td align="center">
+            {{# if media }}
+            <i class="fa fa-camera green"></i>
+            {{else}}
+            <i class="fa fa-camera red2"></i>
+            {{/if}}
+          </td>
+          <td>
+            <div class="btn-group">
+              <a href="{{ pathFor 'collections.news.show' }}" target="_blank" class="btn btn-xs btn-default"><i class="fa fa-eye"></i></a>
+              {{# if canShowUpdate }}
+              {{# unless currentUser.hasRole 'admin' }}
+              <a href="{{ pathFor 'collections.news.data' }}" target="_blank" class="btn btn-xs btn-default">Categorizar</a>
+              {{/ unless }}
+              <a href="{{ pathFor 'collections.news.update' }}" target="_blank" class="btn btn-xs btn-default">Editar</a>
+              {{/ if }}
+              {{# if canShowRemove }}
+              <a href="" class="btn btn-xs btn-danger">Borrar</a>
+              {{/ if }}
+            </div>
+          </td>
+        </tr>
+        {{/ if }}
+        {{/ unless }}
+        {{/ each }}
+         {{# each news }}
+          {{# unless currentUser.hasRole 'ejecutivo' }}
+          {{# unless currentUser.hasRole 'agencia' }}
+          {{# unless currentUser.hasRole 'cliente' }}
+        <tr>
+          <td>
+            {{# if allChecked }}
+            <input type="checkbox" class="check-doc" checked="true" disabled="true">
+            {{ else }}
+            <input type="checkbox" class="check-doc">
+            {{/ if }}
+          </td>
+          <td>
+            {{ title }}
+          </td>
+          <td>
+            {{ dateFormat date 'D-M-YYYY' }}
+          </td>
+           <td>
+            {{# each data }}
+            {{ data.tiponot }}
+            {{/ each }}
+          </td>
+          <td>
+           <!-- {{# each mediums }}
+            {{ name }}
+            {{/ each }} -->
+            {{# each data }}
+            {{ data.medio }}
+            {{/ each }}
+          </td>
+          <td>
+            {{# each brands }}
+            <a class="label color">{{ name }}</a>
+            {{/ each }}
+          </td>
+          <td align="center">
+            {{# unless currentUser.hasRole 'admin' }}
+            {{# if isCategorized currentUser._id }}
+            <i class="fa fa-send green"></i>
+            {{else}}
+            <i class="fa fa-send red2"></i>
+            {{/ if }}
+            {{/ unless}}
+
+            {{# unless currentUser.hasRole 'ejecutivo' }}
+            {{# unless currentUser.hasRole 'agencia' }}
+            {{# unless currentUser.hasRole 'cliente' }}
+
+            {{# if prevAprove }}
+            <i class="fa fa-send green"></i>
+            {{else}}
+            <i class="fa fa-send red2"></i>
+            {{/if}}
+            
+            {{/ unless }}
+            {{/ unless }}
+            {{/ unless }}
+
+          </td>
+          <td align="center">
+           {{# if media }}
+            <i class="fa fa-camera green"></i>
+            {{else}}
+            <i class="fa fa-camera red2"></i>
+            {{/if}}
+          </td>
+          <td>
+            <div class="btn-group">
+              <a href="{{ pathFor 'collections.news.show' }}" target="_blank" class="btn btn-xs btn-default"><i class="fa fa-eye"></i></a>
+              {{# if canShowUpdate }}
+              {{# unless currentUser.hasRole 'admin' }}
+              <a href="{{ pathFor 'collections.news.data' }}" target="_blank" class="btn btn-xs btn-default">Categorizar</a>
+              {{/ unless }}
+              <a href="{{ pathFor 'collections.news.update' }}" target="_blank" class="btn btn-xs btn-default">Editar</a>
+              {{/ if }}
+              {{# if canShowRemove }}
+              <a href="{{ pathFor 'collections.news.delete' }}" class="btn btn-xs btn-danger">Borrar</a>
+              {{/ if }}
+            </div>
+          </td>
+        </tr>
+        {{/ unless }}
+        {{/ unless }}
+        {{/ unless }}
+        {{/ each }}
+      </tbody>
+    </table>
+
+    <p>
+    {{# if currentUser.hasRole 'admin' }}
+      {{# if totalCount }}
+      <b>{{ localCount }} de {{ totalCount }}</b>
+      {{/ if }}
+      {{/ if }}
+      {{# if Template.subscriptionsReady }}
+      {{# if canLoadMore }}
+      <div>
+      <a href="#" class="btn btn-warning load-more-btn" style="margin-left: 0px;">Mostrar Mas</a>
+      </div>
+      {{/ if }}
+      {{ else }}
+      <b>Cargando...</b>
+      {{/ if }}
+    </p>
+  </div>
+  {{# if checkedCount }}
+
+  {{# unless currentUser.hasRole 'ejecutivo' }}
+  {{# unless currentUser.hasRole 'agencia' }}
+  {{# unless currentUser.hasRole 'cliente' }}
+  <span class="pull-right">
+    <b style="margin-right: 300px;">
+     <a href="#" class="btn btn-danger btn-deletenews">Borrar Noticias</a>
+   </b>
+ </span>
+ <span class="pull-left">
+  <b style="margin-left: 300px;">
+   <a href="#" class="btn btn-success btn-aprovenews">Enviar Noticias</a>
+ </b>
+</span>
+{{/ unless }}
+{{/ unless }}
+{{/ unless }}
+
+{{/ if }}
+<br><br>
+{{/ Layout }}
+</template>

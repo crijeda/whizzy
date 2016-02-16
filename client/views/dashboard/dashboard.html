@@ -1,0 +1,229 @@
+<template name="dashboard">
+  {{# Layout template="orionBootstrapMediumContentOffset" }}
+  {{# Layout template="orionBootstrapTitle" }}
+  Dashboard
+  {{/ Layout }}
+
+  {{# if Template.subscriptionsReady }}
+
+  <div class="row">
+    <div class="col-lg-3 col-xs-6 hidden">
+      <!-- small box -->
+      <div class="small-box bg-aqua">
+        <div class="inner">
+          <h3>{{ newsCountToday }}</h3>
+          <p>Notas Nuevas</p>
+        </div>
+        <div class="icon">
+          <i class="fa fa-star"></i>
+        </div>
+        <a href="#" class="small-box-footer hidden">Ir <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div><!-- ./col -->
+    <div class="col-lg-4 col-xs-12">
+      <!-- small box -->
+      <div class="small-box bg-green">
+        <div class="inner">
+          <h4>Notas Categorizadas</h4>
+          <div class="pull-left">
+            <h3>{{ newsPercentCategorizeToday }} <sup>%</sup></h3>
+            <p><b>HOY</b></p>
+          </div>
+          <div class="pull-right">
+            <h3>{{ newsPercentCategorize }} <sup>%</sup></h3>
+            <p><b>TOTAL</b></p>
+          </div>
+        </div>
+        <div class="icon">
+          <i class="fa fa-bars"></i>
+        </div>
+        <a href="#" class="small-box-footer hidden">Ir <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div><!-- ./col -->
+    <div class="col-lg-4 col-xs-12">
+      <!-- small box -->
+      <div class="small-box bg-yellow">
+        <div class="inner">
+          <h4>Notas por Categorizar</h4>
+          <div class="pull-left">
+            <h3>{{ newsToCategorizeToday }}</h3>
+            <p><b>HOY</b></p>
+          </div>
+          <div class="pull-right">
+            <h3>{{ newsToCategorize }}</h3>
+            <p><b>TOTAL</b></p>
+          </div>
+        </div>
+        <div class="icon">
+          <i class="fa fa-edit"></i>
+        </div>
+        <a href="#" class="small-box-footer hidden">Ir <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+
+    </div><!-- ./col -->
+    <div class="col-lg-4 col-xs-12">
+      <!-- small box -->
+      <div class="small-box bg-red">
+        <div class="inner">
+          <h4>Banco de Noticias</h4>
+          <div class="pull-left">
+            <h3>{{ newsCountToday }}</h3>
+            <p><b>HOY</b></p>
+          </div>
+          <div class="pull-right">
+            <h3>{{ newsCount }}</h3>
+            <p><b>TOTAL</b></p>
+          </div>
+        </div>
+        <div class="icon">
+          <i class="fa fa-newspaper-o"></i>
+        </div>
+        <a href="#" class="small-box-footer hidden">Ir <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+
+    </div><!-- ./col -->
+  </div><!-- /.row -->
+
+  <div class="controls hidden">
+    <!-- <label>Filtrar por ejecutivo</label>
+    <input type="text" name="executiveFilter"> -->
+    <!-- {{# autoForm schema="SearchDashboardSchema" id="collectionsNewsIndexSearchForm" }}
+      <div class="row">
+        <div class="col-sm-3">
+          {{> afQuickField name='brandsIds' }}
+        </div>
+      </div>
+    {{/ autoForm }} -->
+  </div>
+
+  <table class="table">
+
+    <thead>
+      <tr>
+        <th>
+          Marca
+        </th>
+        <th>
+          Notas Dia
+        </th>
+        <th>
+          Categorizadas Dia
+        </th>
+        <th>
+          Categorizadas Totales
+        </th>
+        <th>
+          Por categorizar Totales
+        </th>
+        <th>
+          Notas Totales
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- {{# each users }}
+      <tr>
+        <td>
+          {{ profile.name }}
+        </td>
+        <td>
+          {{# if userBrands }}
+          {{# each userBrands }}
+          <span class="label label-danger">{{ name }}</span>
+          {{/ each }}
+          {{ else }}
+          Sin marcas
+          {{/ if }}
+        </td>
+        <td>
+          {{# if userBrands }}
+          <b>{{ userCategorized }}</b> ({{ userCategorizedPercentage }})
+          {{ else }}
+          Sin noticias
+          {{/ if }}
+        </td>
+        <td>
+          {{# if userBrands }}
+          <b>{{ userToCategorize }}</b>
+          {{ else }}
+          Sin noticias
+          {{/ if }}
+        </td>
+      </tr>
+      {{/ each }} -->
+
+      {{# each brands}}
+        <tr>
+          <td>  
+            <span class="label label-danger">{{ name }}</span>
+            <!-- {{name}} -->
+          </td>
+
+          <td>  
+            {{brandTodayNews}}
+          </td>
+
+          <td>  
+            {{brandNewsCategorizedToday}}
+          </td>
+
+          <td>  
+            {{brandNewsCategorized}}
+          </td>
+
+          <td>  
+            {{brandNewsToCategorize}}
+          </td>
+
+          <td>  
+            {{brandNewsCount}}
+          </td>
+
+        </tr>
+      {{/ each}}
+
+      <tr>
+          <td>  
+          </td>
+
+          <td>
+            <b>
+              {{newsCountToday}}
+            </b>  
+          </td>
+
+          <td>  
+            <b>
+              {{newsCategorizedToday}}
+            </b>  
+          </td>
+
+          <td>  
+            <b>
+              {{newsCategorized}}
+            </b>  
+          </td>
+
+          <td>  
+            <b>
+              {{newsToCategorize}}
+            </b>  
+          </td>
+
+          <td>  
+            <b>
+              {{newsCount}}
+            </b>  
+          </td>
+        </tr>
+
+    </tbody>
+  </table>
+  {{ else }}
+  <p>
+    <b>Cargando...</b>
+  </p>
+  {{/ if }}
+  {{/ Layout }}
+</template>

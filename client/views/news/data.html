@@ -1,0 +1,152 @@
+<template name="collectionsNewsData">
+  {{# Layout template="orionBootstrapMediumContentOffset" }}
+    {{# Layout template="orionBootstrapTitle" }}
+      Categorizar Noticia
+    {{/ Layout }}
+    {{# Layout template="orionBootstrapContentContainer" }}
+      <div class="row">
+      <div class="col-sm-8">
+        
+      {{>noticiaACategorizar}}
+      </div>
+      <div class="col-sm-4">
+        {{#autoForm id="collectionsNewsForm" buttonContent=false type="update" collection="News" doc=newsDoc}}
+          {{> afQuickField name="title"}}
+          {{> afQuickField name="subtitle"}}
+          {{> afQuickField name="body"}}
+          {{> afQuickField name="date"}}
+          {{> afQuickField name="url"}}
+          {{# if newsDataMedium}}
+          <p>Medio Sugerido: <a>{{ newsDataMedium }}</a></p>
+          {{/ if }}
+          {{> afQuickField name="mediumId"}}
+          {{> afQuickField name="suplementId"}}
+          <div class="row">
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-8">
+              <div class="buttons text-right">
+                <a class="btn btn-primary save-news-btn" >Actualizar</a>
+              </div>
+            </div>
+          </div>
+        {{/autoForm}}
+
+        </div>
+        </div>
+
+    {{/ Layout }}
+
+
+    {{# Layout template="orionBootstrapContentContainer" }}
+        {{# if newsData }}
+        {{# if newsDataType}}
+          <p>Tipo de Noticia sugerida: <a>{{ newsDataType }}</a></p>
+          {{/ if }}
+          {{> quickForm schema=getSchema id="collectionsNewsDataForm" buttonContent=false type="update" doc=newsData collection="NewsData" }}
+          <br>
+          <div class="row">
+            <div class="col-sm-4">
+              {{# with agency }}
+                <p>
+                  <b>{{ name }}</b>
+                </p>
+              {{/ with }}
+            </div>
+            <div class="col-sm-8">
+              <div class="buttons text-right">
+                <!-- <a class="btn btn-default" href="{{ pathFor 'collections.news.index' }}">{{ i18n 'global.cancel' }}</a> -->
+                 <a class="btn btn-default" href="#">{{ i18n 'global.cancel' }}</a>
+                <a class="btn btn-primary save-btn save-news-btn">Actualizar</a>
+              </div>
+            </div>
+          </div>
+        {{ else }}
+          <p>
+           <!--  Ocurrió un error -->
+          </p>
+        {{/ if }}
+    {{/ Layout }}
+    <hr>
+    
+    {{# Layout template="orionBootstrapContentContainer" }}
+ 
+        {{> quickForm schema=getNewsBrandsSchema id="collectionsNewsBrandsForm" buttonContent=false type="update" collection="NewsBrands" doc=newsBrands }}
+
+
+        <div class="row">
+          <div class="col-sm-offset-4 col-sm-8">
+            <div class="buttons text-right">
+              <a class="btn btn-primary save-brands-btn save-btn save-news-btn">Guardar</a>
+            </div>
+          </div>
+        </div>
+
+
+    {{/ Layout }}
+  {{/ Layout }}
+</template>
+
+<template name="noticiaACategorizar">
+  {{#if Template.subscriptionsReady}}
+    {{# with article }}
+  <!--     <p>
+        <small>
+          {{ dateFormat date 'LL' }}
+        </small>
+      </p>
+      <h3>
+        {{ title }}
+      </h3>
+      <p>
+        {{ subtitle }}
+      </p> -->
+
+      {{# each media }}
+        <p>
+          <a href="{{ url }}" target="_blank">
+            <img src="{{ url }}" alt="" style="width: 100%" />
+          </a>
+        </p>
+        <p>
+          <a href="{{ url }}" download><i class="fa fa-download"></i> Descargar Archivo</a>
+        </p>
+      {{/ each }}
+
+      <!-- <br>
+      <div class="body">
+        {{ nl2br body }}
+      </div>
+      <br>
+
+      {{# with url }}
+        <p>
+          <a href="{{ this }}" target="_blank">{{ this }}</a>
+        </p>
+      {{/ with }}
+      <hr>
+      <p>
+        {{ medium.name }}
+      </p>
+
+      <p>
+        {{ suplement.name }}
+      </p>
+
+      <p>
+        {{ type }}
+      </p> -->
+
+
+
+    {{ else }}
+      <p>
+        No se encontró el artículo
+      </p>
+    {{/ with }}
+  {{else}}
+    <p>
+      Cargando...
+    </p>
+  {{/if}}
+</template>

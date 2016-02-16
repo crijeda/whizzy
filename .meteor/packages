@@ -1,0 +1,46 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+fourseven:scss
+twbs:bootstrap
+fortawesome:fontawesome
+orionjs:core
+orionjs:bootstrap
+orionjs:lang-es
+orionjs:image-attribute
+orionjs:file-attribute
+orionjs:relationships
+vsivsi:orion-file-collection
+nicolaslopezj:orion-exporter
+iron:router
+zimme:active-route
+tsega:bootstrap3-datetimepicker@=3.1.3_3
+aldeed:autoform-bs-datetimepicker
+momentjs:moment
+file-watch
+npm-dependencies
+peerlibrary:xml2js
+froatsnook:request
+nicolaslopezj:orion-users-with-roles-attribute
+useraccounts:iron-routing
+dvc:orion-tags
+reywood:publish-composite
+matb33:collection-hooks
+tmeasday:publish-counts
+standard-minifiers
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+session
+jquery
+tracker
+logging
+reload
+random
+ejson
+spacebars
+check

@@ -1,0 +1,31 @@
+<template name="outAdminLayout">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3" style="text-align:center">
+            <br>
+            <img src="/logo.png" alt="Wizzy" style="width: 150px;" />
+          </div>
+        </div>
+        {{> yield }}
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="resetPasswordLayout">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3" style="text-align:center">
+            <br>
+            <img src="/logo.png" alt="Wizzy" style="width: 150px;" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{> yield }}
+</template>

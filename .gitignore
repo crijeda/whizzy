@@ -1,0 +1,5 @@
+.meteor/local
+.ssh
+mup.json
+settings.json
+settings.local.json

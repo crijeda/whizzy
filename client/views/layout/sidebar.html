@@ -1,0 +1,25 @@
+<template name="sidebar">
+<head>
+<link rel="icon" 
+      type="image/ico" 
+      href="favicon.ico" />
+</head>
+  <ul class="sidebar-nav orion-links">
+    <li class="sidebar-brand">
+      {{# if showAgencyLogo }}
+        {{# if agency.logo }}
+          <img src="{{ agency.logo.url }}" alt="{{ agency.name }}" style="height: 45px" />
+        {{ else }}
+          {{ agency.name }}
+        {{/ if }}
+      {{ else }}
+        <img src="/sidebar-logo.png" alt="{{ agency.name }}" style="height: 45px" />
+      {{/ if }}
+    </li>
+    {{# each adminLinks }}
+      {{> orionBootstrapSidebarLink }}
+    {{/ each }}
+  </ul>
+
+</template>
+

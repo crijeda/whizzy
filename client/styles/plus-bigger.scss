@@ -1,0 +1,47 @@
+.title {
+  .btn.btn-default {
+    margin-top: 0px;
+    float: right;
+    background-color: #337ab7;
+    border: 0;
+    padding: 15px 20px 15px 20px;
+    .fa-plus {
+      font-size: 16px;
+      color: #ffffff;
+
+      &:before {
+        content: 'Añadir +';
+        align: center;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-weight: 600;
+      }
+      
+    }
+  }
+}
+
+.dashboard{
+
+    margin-top: 0px;
+    border-radius: 5px;
+    background-color: #00c0ef;
+    border: 0;
+    padding: 25px 20px 20px 20px;
+    
+
+}
+.at-form {
+  float: none;
+  margin: auto;
+  overflow: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #11ABB0;
+}
+
+.at-form p {
+  font-size: 15px;
+  line-height: 20px;
+}

@@ -1,0 +1,80 @@
+<template name="collectionsNewsShow">
+  {{# Layout template="orionBootstrapMediumContentOffset" }}
+    {{# Layout template="orionBootstrapTitle" }}
+      Noticia
+    {{/ Layout }}
+    {{# Layout template="orionBootstrapContentContainer" }}
+      {{#if Template.subscriptionsReady}}
+        {{# with article }}
+          <p>
+            <small>
+              {{ dateFormat date 'LL' }}
+            </small>
+          </p>
+          <h3>
+            {{ title }}
+          </h3>
+          <p>
+            {{ subtitle }}
+          </p>
+
+          {{# each media }}
+            <p>
+              <a href="{{ url }}" target="_blank">
+                <img src="{{ url }}" alt="" style="width: 100%" />
+              </a>
+            </p>
+              <p>
+          <a href="{{ url }}" download><i class="fa fa-download"></i> Descargar Archivo</a>
+              </p>
+          {{/ each }}
+
+          <br>
+          <div class="body">
+            {{ nl2br body }}
+          </div>
+          <br>
+
+  <!--         {{# with url }}
+            <p>
+              <a href="{{ this }}" target="_blank">{{ this }}</a>
+            </p>
+          {{/ with }} -->
+          <hr>
+          <p>
+            {{ medium.name }}
+          </p>
+
+          <p>
+            {{ suplement.name }}
+          </p>
+
+          <p>
+            {{ type }}
+          </p>
+          <p>
+          {{# if pieima }}
+            <b>Pie Imagen: </b> {{ pieima }}
+            {{ /if }}
+          </p>
+           <p>
+          {{# if url }}
+            <b>URL: </b> <a href="{{ url }}" target="_blank">{{ url }}</a>
+            {{ /if }}
+          </p>
+
+
+
+        {{ else }}
+          <p>
+            No se encontró el artículo
+          </p>
+        {{/ with }}
+      {{else}}
+        <p>
+          Cargando...
+        </p>
+      {{/if}}
+    {{/ Layout }}
+  {{/ Layout }}
+</template>
